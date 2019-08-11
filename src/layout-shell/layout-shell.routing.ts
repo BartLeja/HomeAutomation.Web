@@ -1,16 +1,22 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
+import { LightSwitcherComponent } from 'src/workspace/light-control/light-switcher/light-switcher.component';
 
 const routes: Routes = [
+    { 
+        path: '',
+        redirectTo: 'shell',
+        pathMatch: 'full'
+    },
     {
-      path: '',
-      component: LayoutComponent,
-    //   children :[{
-    //     path: 'interviewquestions',
-    //     component: InterviewQuestionsComponent 
-    //   },
-   // ]
+      path: 'shell', component: LayoutComponent,
+      children :[{
+        path: 'LightControl',
+        component: LightSwitcherComponent 
+      },
+      {path: '', redirectTo: 'LightControl', pathMatch: 'full'}
+   ]
     }
   ];
   

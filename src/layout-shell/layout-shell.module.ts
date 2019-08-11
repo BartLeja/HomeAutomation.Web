@@ -14,7 +14,9 @@ import {
   MatSlideToggleModule,
   MatTreeModule 
 } from '@angular/material';
+
 import { LayoutShellRouting } from './layout-shell.routing';
+import { LightControlModule } from 'src/workspace/light-control/light-control.module';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { LayoutShellRouting } from './layout-shell.routing';
     MatListModule,
     MatSlideToggleModule,
     MatTreeModule,
+    LightControlModule
   ]
 })
 export class LayoutShellModule { }
