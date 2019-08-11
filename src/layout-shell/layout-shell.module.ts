@@ -14,12 +14,14 @@ import {
   MatSlideToggleModule,
   MatTreeModule 
 } from '@angular/material';
+import { LayoutShellRouting } from './layout-shell.routing';
 
 
 @NgModule({
   declarations: [LayoutComponent, SidenavComponent, ToolbarComponent],
   imports: [
     CommonModule,
+    LayoutShellRouting,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
