@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-light-card',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LightCardComponent implements OnInit {
 
   constructor() { }
+  @Input() product;
 
   ngOnInit() {
   }

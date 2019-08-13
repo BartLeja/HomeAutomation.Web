@@ -12,7 +12,7 @@ import {
   MatIconModule,
   MatListModule,
   MatSlideToggleModule,
-  MatTreeModule 
+  MatTreeModule,
 } from '@angular/material';
 
 import { LayoutShellRouting } from './layout-shell.routing';

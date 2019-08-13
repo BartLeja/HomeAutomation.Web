@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./light-switcher.component.css']
 })
 export class LightSwitcherComponent implements OnInit {
-
+  public product:Array<string>= ['','','','','','','']
   constructor() { }
 
   ngOnInit() {

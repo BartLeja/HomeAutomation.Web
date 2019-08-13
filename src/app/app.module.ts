@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutShellModule } from 'src/layout-shell/layout-shell.module';
+import { MatCardModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LayoutShellModule } from 'src/layout-shell/layout-shell.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    LayoutShellModule
+    LayoutShellModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
