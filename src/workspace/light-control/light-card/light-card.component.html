@@ -3,11 +3,13 @@
     <mat-card-title>Living room</mat-card-title>
     <mat-card-subtitle>Lamp first</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="https://www.bluenovo.com/wp-content/uploads/2016/03/lightbuild.png" alt="Photo of a Shiba Inu">
+  <!-- <img mat-card-image src="https://www.bluenovo.com/wp-content/uploads/2016/03/lightbuild.png" alt="Photo of a Shiba Inu"> -->
+  <img *ngIf="!isLightOn" mat-card-image src="https://www.freeiconspng.com/uploads/light-bulb-png-bulb-png1243-0.png" alt="Photo of a Shiba Inu">
+  <img *ngIf="isLightOn" mat-card-image src="https://www.freeiconspng.com/uploads/yellow-light-bulb-png-image-16.png" alt="Photo of a Shiba Inu">
   <mat-card-content>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click) = "changeLightStatus()">On</button>
-    <button mat-button>Off</button>
+    <button mat-button (click) = "changeLightStatus(true)">On</button>
+    <button mat-button (click) = "changeLightStatus(false)" >Off</button>
   </mat-card-actions>
 </mat-card>
