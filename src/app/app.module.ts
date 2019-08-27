@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutShellModule } from 'src/layout-shell/layout-shell.module';
 import { MatCardModule } from '@angular/material';
+import { UserAccessModule } from 'src/user-access/user-access.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
+import { AuthInterceptor } from 'src/core/Interceptors/auth.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -16,9 +20,13 @@ import { MatCardModule } from '@angular/material';
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutShellModule,
-    MatCardModule
+    UserAccessModule,
+    MatCardModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

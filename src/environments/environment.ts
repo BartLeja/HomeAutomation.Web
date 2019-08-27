@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  IdentityServerbaseUrl: 'https://localhost:5001/',
+  LightingSystemServiceUrl: 'https://localhost:44367/'
 };
 
 /*

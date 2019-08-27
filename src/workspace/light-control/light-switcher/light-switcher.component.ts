@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LightService } from '../services/light-control.service';
 
 @Component({
   selector: 'app-light-switcher',
@@ -9,9 +10,16 @@ export class LightSwitcherComponent implements OnInit {
   public product:Array<string>= [''
   // ,'','','','','',''
 ]
-  constructor() { }
+  constructor(private lightService: LightService ) { }
 
   ngOnInit() {
+    let user = { email: "bleja"};
+
+    this.lightService.getLightingSystemConfiguration('bleja').subscribe( (res) =>
+      {
+        console.log(res);
+      }
+    )
   }
 
 }
