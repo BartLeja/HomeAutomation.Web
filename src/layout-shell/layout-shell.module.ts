@@ -17,6 +17,7 @@ import {
 
 import { LayoutShellRouting } from './layout-shell.routing';
 import { LightControlModule } from 'src/workspace/light-control/light-control.module';
+import { CoreModule } from 'src/core/core.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { LightControlModule } from 'src/workspace/light-control/light-control.mo
     MatListModule,
     MatSlideToggleModule,
     MatTreeModule,
-    LightControlModule
+    LightControlModule,
+  
   ]
 })
 export class LayoutShellModule { }

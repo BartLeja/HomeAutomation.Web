@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   IdentityServerbaseUrl: 'https://localhost:5001/',
-  LightingSystemServiceUrl: 'https://localhost:44367/'
+  LightingSystemServiceUrl: 'https://localhost:5003/'
 };
 
 /*
