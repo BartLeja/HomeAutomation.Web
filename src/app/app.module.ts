@@ -9,6 +9,8 @@ import { MatCardModule } from '@angular/material';
 import { UserAccessModule } from 'src/user-access/user-access.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { AuthInterceptor } from 'src/core/Interceptors/auth.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { AuthInterceptor } from 'src/core/Interceptors/auth.interceptor';
     UserAccessModule,
     MatCardModule,
     HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
