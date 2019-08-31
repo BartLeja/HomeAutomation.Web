@@ -7,7 +7,7 @@ import { AuthGuard } from 'src/core/Guard/auth.guard';
 const routes: Routes = [
     { 
         path: '',
-        redirectTo: 'shell',
+        redirectTo: 'shell/LightControl',
         pathMatch: 'full',
         canActivate: [AuthGuard]
     },
@@ -17,7 +17,6 @@ const routes: Routes = [
         path: 'LightControl',
         component: LightSwitcherComponent ,  canActivate: [AuthGuard]
       },
-      {path: '', redirectTo: 'LightControl', pathMatch: 'full'}
    ]
     }
   ];

@@ -5,7 +5,7 @@ import { LoginFormComponent } from 'src/user-access/login-form/login-form.compon
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'shell',
     component: LayoutComponent,
   },
   {
