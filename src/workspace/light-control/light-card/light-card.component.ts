@@ -8,16 +8,17 @@ import { SignalRLightControlClientService } from '../services/signalR-light-cont
 })
 export class LightCardComponent implements OnInit {
 
-  constructor(private signalRLightControlClientService :SignalRLightControlClientService ) { }
-  @Input() product;
+  constructor(private signalRLightControlClientService: SignalRLightControlClientService ) { }
+  @Input() lightPoint;
   public isLightOn = false;
 
   ngOnInit() {
     this.signalRLightControlClientService.signalRClientInit();
+    this.isLightOn = this.signalRLightControlClientService.lightPoint.lightPointStatus;
   }
-
+  
   public changeLightStatus(status: boolean) {
     this.signalRLightControlClientService.sendLightPointStatus(0,status,'Test2');
-    this.isLightOn = status;
+    //this.isLightOn = status;
   }
 }

@@ -9,20 +9,17 @@ import { LocalLightingService } from '../models/local-lighting-service.model';
 })
 export class LightSwitcherComponent implements OnInit {
   public localLightingService : LocalLightingService; 
-  public product:Array<string>= [''
-  // ,'','','','','',''
-]
-  constructor(private lightService: LightService ) { }
+ 
+  constructor(private lightService: LightService ) { 
+   }
 
   ngOnInit() {
     let user = { email: "bleja"};
 
-    this.lightService.getLightingSystemConfiguration('bleja').subscribe( (res : LocalLightingService ) =>
-      {
-        this.localLightingService = res;
-        console.log(this.localLightingService);
-      }
-    )
+    let test = this.lightService.getLightingSystemConfiguration('bleja');
+    test.subscribe( (res : any ) =>{
+        this.localLightingService = res.localLightingService;
+        console.log(this.localLightingService.lightPointList);
+      });
   }
-
 }

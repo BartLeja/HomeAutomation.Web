@@ -1,5 +1,5 @@
 <div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
-       <div fxFlex *ngFor="let product of product" class="card-item">
-         <app-light-card [ngStyle]="{'width':'300' + 'px'}" [product]="product"></app-light-card>
+       <div fxFlex *ngFor="let lightPoint of localLightingService.lightPointList" class="card-item">
+         <app-light-card [ngStyle]="{'width':'300' + 'px'}" [lightPoint]="lightPoint"></app-light-card>
        </div>
   </div> 

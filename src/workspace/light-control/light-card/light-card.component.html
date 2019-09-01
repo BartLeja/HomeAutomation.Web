@@ -4,8 +4,9 @@
     <mat-card-subtitle>Lamp first</mat-card-subtitle>
   </mat-card-header>
   <!-- <img mat-card-image src="https://www.bluenovo.com/wp-content/uploads/2016/03/lightbuild.png" alt="Photo of a Shiba Inu"> -->
-  <img *ngIf="!isLightOn" mat-card-image src="https://www.freeiconspng.com/uploads/light-bulb-png-bulb-png1243-0.png" alt="Photo of a Shiba Inu">
-  <img *ngIf="isLightOn" mat-card-image src="https://www.freeiconspng.com/uploads/yellow-light-bulb-png-image-16.png" alt="Photo of a Shiba Inu">
+  <img *ngIf="this.signalRLightControlClientService.lightPoint===undefined" mat-card-image src="https://www.freeiconspng.com/uploads/light-bulb-png-bulb-png1243-0.png" alt="Photo of a light off bulb">
+  <img *ngIf="!this.signalRLightControlClientService.lightPoint.lightPointStatus" mat-card-image src="https://www.freeiconspng.com/uploads/light-bulb-png-bulb-png1243-0.png" alt="Photo of a light off bulb">
+  <img *ngIf="this.signalRLightControlClientService.lightPoint.lightPointStatus" mat-card-image src="https://www.freeiconspng.com/uploads/yellow-light-bulb-png-image-16.png" alt="Photo of a light on bulb">
   <mat-card-content>
   </mat-card-content>
   <mat-card-actions>
