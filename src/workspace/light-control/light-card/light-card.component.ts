@@ -17,7 +17,7 @@ export class LightCardComponent implements OnInit {
   }
 
   public changeLightStatus(status: boolean) {
-    this.signalRLightControlClientService.sendLightPointStatus(0,status,'Test1');
+    this.signalRLightControlClientService.sendLightPointStatus(0,status,'Test2');
     this.isLightOn = status;
   }
 }

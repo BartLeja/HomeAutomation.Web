@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import { HubConnection, HubConnectionBuilder} from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
+import { SignalRLightPoint } from '../models/signalR-light-point.model'
 
 @Injectable({
     providedIn: 'root',
   })
   export class SignalRLightControlClientService {
+    public lightPoint : SignalRLightPoint;
     private hubConnection: HubConnection;
     private builder : HubConnectionBuilder;
     constructor() {}
@@ -26,7 +28,8 @@ import * as signalR from '@aspnet/signalr';
           });
 
         this.hubConnection.on('ReceiveLightPointStatus', (lightPointNumber, lightPointStatus, lightMqttId) => {
-            console.log(`Message from ${lightPointNumber} recived.`);
+            this.lightPoint = new SignalRLightPoint(lightPointNumber, lightPointStatus, 'lightMqttId');
+            console.log( this.lightPoint);
           });
 
         this.hubConnection
