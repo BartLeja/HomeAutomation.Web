@@ -15,9 +15,11 @@ import {
   MatInputModule,
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { LogoComponent } from './logo/logo.component';
 
 @NgModule({
-  declarations: [LoginFormComponent],
+  declarations: [LoginFormComponent, WelcomePageComponent, LogoComponent],
   imports: [
     CommonModule,
     MatToolbarModule,

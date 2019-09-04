@@ -23,7 +23,7 @@ export class LoginFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundImage = 'linear-gradient(-20deg, #bdc3c7 0%, #2c3e50 100%)';
+    //this.elementRef.nativeElement.ownerDocument.body.style.backgroundImage = 'linear-gradient(-20deg, #bdc3c7 0%, #2c3e50 100%)';
   }
 
   submit() {

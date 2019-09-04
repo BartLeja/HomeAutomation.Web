@@ -8,7 +8,7 @@ import { SignalRLightControlClientService } from '../services/signalR-light-cont
 })
 export class LightCardComponent implements OnInit {
 
-  constructor(private signalRLightControlClientService: SignalRLightControlClientService ) { }
+  constructor(public signalRLightControlClientService: SignalRLightControlClientService ) { }
   @Input() lightPoint;
   public isLightOn = false;
 
