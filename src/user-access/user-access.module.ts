@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { UserAccessRouting } from './user-access.routing';
+import { AngularFittextModule } from 'angular-fittext';
 
 import {
   MatToolbarModule,
@@ -31,7 +32,8 @@ import { LogoComponent } from './logo/logo.component';
     MatTreeModule,
     MatCardModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFittextModule,
   ]
 })
 export class UserAccessModule { }
