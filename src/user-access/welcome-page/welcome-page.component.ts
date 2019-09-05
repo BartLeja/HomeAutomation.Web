@@ -7,7 +7,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
   styleUrls: ['./welcome-page.component.css']
 })
 export class WelcomePageComponent implements OnInit {
-  private mobileQuery: MediaQueryList;
+  public mobileQuery: MediaQueryList;
   
   private _mobileQueryListener: () => void;
   constructor(

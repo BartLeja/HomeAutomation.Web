@@ -1,7 +1,7 @@
 :host {
     display: flex;
     justify-content: center;
-    margin: 10% 0px;
+    margin: 0% 0px 30%;
   }
 
   .mat-form-field {
@@ -13,6 +13,7 @@
   mat-card-content {
     display: flex;
     justify-content: center;
+      color: #bdc3c7
   }
 
   .error {
@@ -32,16 +33,23 @@
 }
 
 h1 {
-    font-size: 300%;
+    font-size: 2vw;
     /*font-family: 'Courgette', cursive;*/
     font-family: 'Lora', serif;
-    color: whitesmoke
+    color: #bdc3c7
 }
 
-.home-automation {
+/* .home-automation {
     display: inline;
-}
+} */
 
 .login-card{
-  margin-top: 1%
+  margin-top: 1%;
+  border: 1px solid #336699
+}
+
+.main-container {
+  display: flex;
+    justify-content: center;
+    /* margin: -25% 0px; */
 }
