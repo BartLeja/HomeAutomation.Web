@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  IdentityServerbaseUrl: 'https://localhost:5001/',
-  LightingSystemServiceUrl: 'https://localhost:5003/'
+  // IdentityServerbaseUrl: 'https://localhost:5001/',
+  // LightingSystemServiceUrl: 'https://localhost:5003/'
+  IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
+  LightingSystemServiceUrl: 'https://homeautomationlightingsystem.azurewebsites.net/'
 };
 
 /*

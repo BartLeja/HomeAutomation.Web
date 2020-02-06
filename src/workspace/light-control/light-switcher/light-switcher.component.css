@@ -31,5 +31,5 @@
     -ms-box-flex: 1;
     -moz-box-flex: 1;
     padding: 10px 10px 10px 10px;
-    width: 300px;
+    /* width: 300px; */
 }

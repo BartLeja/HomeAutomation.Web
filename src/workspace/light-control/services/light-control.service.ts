@@ -13,7 +13,7 @@ export class LightService {
 
     public getLightingSystemConfiguration(userName: any): Observable<any> {
         let params = new HttpParams();
-        params = params.append('email', userName);
+        params = params.append('email', `${userName}`);
         return this.http.get(`${environment.LightingSystemServiceUrl}api/LightingSystemConfiguration`,{params: params})
     }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LightService } from '../services/light-control.service';
 import { LocalLightingService } from '../models/local-lighting-service.model';
+import { resetCompiledComponents } from '@angular/core/src/render3/jit/module';
+import { SignalRLightControlClientService } from '../services/signalR-light-control-client.service';
 
 @Component({
   selector: 'app-light-switcher',
@@ -8,18 +10,26 @@ import { LocalLightingService } from '../models/local-lighting-service.model';
   styleUrls: ['./light-switcher.component.css']
 })
 export class LightSwitcherComponent implements OnInit {
-  public localLightingService : LocalLightingService; 
+  public localLightingService : any; 
+  public lightPointList : any[];
  
-  constructor(private lightService: LightService ) { 
+  constructor(private lightService: LightService,
+              private signalRLightControlClientService: SignalRLightControlClientService ) { 
    }
 
   ngOnInit() {
+
+    this.signalRLightControlClientService.signalRClientInit();
     let user = { email: "bleja"};
 
-    let test = this.lightService.getLightingSystemConfiguration('bleja');
+    // let user = localStorage.getItem('id_token');
+    
+    let test = this.lightService.getLightingSystemConfiguration('blejaService');
     test.subscribe( (res : any ) =>{
-        this.localLightingService = res.localLightingService;
-        console.log(this.localLightingService.lightPointList);
+      console.log(res);
+        this.lightPointList = res.localLightingService.lightPoints;
+        console.log(this.localLightingService);
+     
       });
   }
 }
