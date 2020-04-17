@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
-import { HubConnection, HubConnectionBuilder} from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder, HubConnectionState} from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 import { SignalRLightPoint } from '../models/signalR-light-point.model'
 import { Subject, Observable } from 'rxjs';
+import { Guid } from "guid-typescript";
+import { environment } from '../../../environments/environment'
 
 @Injectable({
     providedIn: 'root',
@@ -26,10 +28,9 @@ import { Subject, Observable } from 'rxjs';
 
     public signalRClientInit(){
         this.builder = new HubConnectionBuilder();
-        // this.hubConnection = this.builder.withUrl(`https://localhost:5003/LightServiceHub`, {
         this.hubConnection = this.builder
-        .withUrl(`https://homeautomationlightingsystem.azurewebsites.net/LightServiceHub`, {
-            accessTokenFactory: () =>  this.testToken
+        .withUrl(environment.LightingSystemSignlRHubUrl, {
+            accessTokenFactory: () =>  localStorage.getItem('id_token')
         })
         .configureLogging(signalR.LogLevel.Information)
         .build();
@@ -39,16 +40,17 @@ import { Subject, Observable } from 'rxjs';
             console.log(`Message from ${user} recived. ${message}`);
           });
 
-        this.hubConnection.on('ReceiveLightPointStatus', (lightPointNumber, lightPointStatus, lightMqttId) => {
-            this.lightPoint = new SignalRLightPoint(lightPointNumber, lightPointStatus,  lightMqttId);
+        this.hubConnection.on('ReceiveLightPointStatus', (lightBulbId, status) => {
+            this.lightPoint = new SignalRLightPoint(lightBulbId, status);
             this.sendMessage(this.lightPoint);
-            console.log( this.lightPoint);
+            console.log( lightBulbId, status);
           });
         
         this.hubConnection.onclose(()=>{
-            this. startHubCennection();
+            this.startHubCennection();
         })
 
+       
         // this.hubConnection
         //     .start()
         //     .catch(err => {
@@ -56,12 +58,24 @@ import { Subject, Observable } from 'rxjs';
         this.startHubCennection();
     }
 
-    public sendLightPointStatus(lightPointNumber: number, lightPointStatus: boolean, lightMqttId: string)
+    public sendLightPointStatus(lightBulbId: Guid, status: boolean)
     {
-        this.hubConnection.invoke('SendLightPointStatus',lightPointNumber,lightPointStatus,lightMqttId)
+        this.hubConnection.invoke('SendLightPointStatus',lightBulbId,status);
     }
 
-    private startHubCennection() : void {
+    public sendHardRestOfLightPointMessage(lightPointId: Guid){
+        this.hubConnection.invoke('SendHardRestOfLightPointMessage',lightPointId);
+    }
+
+    public senddRestOfLightPointMessage(lightPointId: Guid){
+        this.hubConnection.invoke('SendRestOfLightPointMessage',lightPointId);
+    }
+
+    public isConnected() : boolean{
+        return this.hubConnection.state === HubConnectionState.Connected ? true : false;
+    }
+
+    public startHubCennection() : void {
         this.hubConnection
         .start()
         .catch(err => {

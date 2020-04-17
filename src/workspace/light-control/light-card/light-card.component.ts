@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { SignalRLightControlClientService } from '../services/signalR-light-control-client.service';
 import { Subscription } from 'rxjs';
 import { SignalRLightPoint } from '../models/signalR-light-point.model';
+import { Guid } from 'guid-typescript';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-light-card',
@@ -10,32 +12,27 @@ import { SignalRLightPoint } from '../models/signalR-light-point.model';
 })
 export class LightCardComponent implements OnInit, OnDestroy {
 
-  constructor(public signalRLightControlClientService: SignalRLightControlClientService ) { }
   @Input() lightPoint;
-  public isLightOn: boolean[];
-  public numberOfLighBulbs = 1;
   public lightPointObservable: SignalRLightPoint;
   private subscription: Subscription;
-  
-  ngOnInit() {
-    console.log('light-card-component');
+
+  constructor(
+    public signalRLightControlClientService: SignalRLightControlClientService, 
+    private router: Router) { }
+
+  public ngOnInit() {
     console.log(this.lightPoint);
-
-    this.isLightOn = []; 
-    this.isLightOn.push(this.lightPoint.lightBulbs[0].lightPointStatus);
-
-    if(this.lightPoint.lightBulbs.length == 2){
-      this.numberOfLighBulbs = 2;
-      this.isLightOn.push(this.lightPoint.lightBulbs[1].lightPointStatus);
-    } 
-
     this.subscription =
       this.signalRLightControlClientService.getMessage().subscribe(message => {
-      if (message && message.lightMqttId === this.lightPoint.mqttId) {
-        console.log('recived changed light');
+      if (message) {
+
+      this.lightPoint.lightBulbs.map(lb => {
+        //TODO renema for bulb
+        if(lb.id === message.lightPointNumber){
+          lb.status = message.lightPointStatus;
+        } 
+      });
         console.log(message);
-        this.lightPointObservable = message;
-        message.lightPointNumber === 0 ?  this.isLightOn[0] = message.lightPointStatus : this.isLightOn[1] = message.lightPointStatus;
       } else {
         // clear messages when empty message received
         // this.messages = [];
@@ -43,13 +40,26 @@ export class LightCardComponent implements OnInit, OnDestroy {
     }); 
   }
   
-  public changeLightStatus(status: boolean,lightPointNumber: number) {
-    this.signalRLightControlClientService.sendLightPointStatus(lightPointNumber,status,this.lightPoint.mqttId);
+  public changeLightStatus(lightPointNumber: Guid, status: boolean,) {
+    if(!this.signalRLightControlClientService.isConnected){
+      this.signalRLightControlClientService.startHubCennection();
+    }
+
+    this.signalRLightControlClientService.sendLightPointStatus(lightPointNumber,status);
+    this.lightPoint.lightBulbs.map(lb => {
+      //TODO renema for bulb
+      if(lb.id === lightPointNumber){
+        lb.status = status;
+      } 
+    });
+  }
+
+  public routeToSettings(lightPointId:Guid){
+    this.router.navigate(['/shell/LightPointSettings',lightPointId]);
   }
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
-}
-
+  }
 }

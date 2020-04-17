@@ -13,3 +13,7 @@
   .bulb {
     width: 300px
   }
+
+  .settings {
+    cursor: pointer;
+  }

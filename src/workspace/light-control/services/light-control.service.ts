@@ -14,6 +14,7 @@ export class LightService {
     public getLightingSystemConfiguration(userName: any): Observable<any> {
         let params = new HttpParams();
         params = params.append('email', `${userName}`);
-        return this.http.get(`${environment.LightingSystemServiceUrl}api/LightingSystemConfiguration`,{params: params})
+        // return this.http.get(`${environment.LightingSystemServiceUrl}api/HomeLightSystem`,{params: params})
+         return this.http.get(`${environment.LightingSystemServiceUrl}api/HomeLightSystem/bdcd95ec-2dc6-4a7b-90ca-f132a7784b0f`);
     }
 }

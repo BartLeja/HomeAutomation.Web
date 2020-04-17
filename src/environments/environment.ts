@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
-  // IdentityServerbaseUrl: 'https://localhost:5001/',
-  // LightingSystemServiceUrl: 'https://localhost:5003/'
+  // LightingSystemSignlRHubUrl: 'http://192.168.0.138:5001/HomeLightSystemHub',
+  // LightingSystemServiceUrl: 'http://192.168.0.138:5001/',
+  // IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
+  LightingSystemSignlRHubUrl: 'https://lightingsystemapi20200320102759.azurewebsites.net/HomeLightSystemHub',
   IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
-  LightingSystemServiceUrl: 'https://homeautomationlightingsystem.azurewebsites.net/'
+  LightingSystemServiceUrl: 'https://lightingsystemapi20200320102759.azurewebsites.net/'
 };
 
 /*

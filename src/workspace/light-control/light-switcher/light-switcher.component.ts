@@ -27,9 +27,7 @@ export class LightSwitcherComponent implements OnInit {
     let test = this.lightService.getLightingSystemConfiguration('blejaService');
     test.subscribe( (res : any ) =>{
       console.log(res);
-        this.lightPointList = res.localLightingService.lightPoints;
-        console.log(this.localLightingService);
-     
+        this.lightPointList = res.lightPoints;
       });
   }
 }
