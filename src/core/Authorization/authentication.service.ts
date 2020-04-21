@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment'
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import * as moment from 'moment';
-import { tap, map, shareReplay, } from 'rxjs/operators';
+import { tap, map, shareReplay, catchError, } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { AuthorizationHelperService } from 'src/core/Authorization/authorization-helper.service';
 
@@ -16,13 +16,14 @@ export class AuthService {
     }
       
     public login(email:string, password:string ): Observable<any> {
-        return this.http.post<any>(`${environment.IdentityServerbaseUrl}api/Authentication`, {email, password}).pipe(
+        return this.http.post<any>(`${environment.IdentityServerbaseUrl}api/Authentication`, {email, password})
+        .pipe(
             tap(res =>this.authorizationHelperService.setSession(res)),
             shareReplay()
         )
     }    
     
-    logout() : void {
+    public logout() : void {
         localStorage.removeItem("id_token");
         localStorage.removeItem("expires_at");
     }

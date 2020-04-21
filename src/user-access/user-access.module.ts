@@ -14,13 +14,15 @@ import {
   MatTreeModule,
   MatCardModule,
   MatInputModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { LogoComponent } from './logo/logo.component';
+import { LoginErrorsSnackComponent } from './login-errors-snack/login-errors-snack.component';
 
 @NgModule({
-  declarations: [LoginFormComponent, WelcomePageComponent, LogoComponent],
+  declarations: [LoginFormComponent, WelcomePageComponent, LogoComponent, LoginErrorsSnackComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -32,8 +34,10 @@ import { LogoComponent } from './logo/logo.component';
     MatTreeModule,
     MatCardModule,
     MatInputModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     AngularFittextModule,
-  ]
+  ],
+  entryComponents: [LoginErrorsSnackComponent]
 })
 export class UserAccessModule { }

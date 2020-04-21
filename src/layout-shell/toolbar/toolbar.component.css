@@ -2,3 +2,7 @@ home-automation-header-title {
     margin-left: 8px;
     border-radius: 25px
   }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }

@@ -27,7 +27,7 @@ export class SidenavComponent implements OnInit, OnDestroy{
   ngOnInit() {
     this.sidenavService.sidenavInit(this.sidenav);
   }
-
+  
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
