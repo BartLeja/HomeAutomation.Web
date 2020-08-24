@@ -78,6 +78,9 @@ import { environment } from '../../../environments/environment'
     public startHubCennection() : void {
         this.hubConnection
         .start()
+        .then(x=>{
+
+        })
         .catch(err => {
             console.error(err.toString()); 
             setTimeout(() => this.startHubCennection(), 5000)} );
