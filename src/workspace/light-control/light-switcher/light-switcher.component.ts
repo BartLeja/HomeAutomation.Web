@@ -23,9 +23,16 @@ export class LightSwitcherComponent implements OnInit {
     let user = { email: "bleja"};
 
     // let user = localStorage.getItem('id_token');
+    this.signalRLightControlClientService.newConnectionEvent.subscribe(()=>{
+      let test = this.lightService.getLightingSystemConfiguration('blejaService')
+      .subscribe( (res : any ) =>{
+        console.log(res);
+          this.lightPointList = res.lightPoints;
+        });
+    });
     
-    let test = this.lightService.getLightingSystemConfiguration('blejaService');
-    test.subscribe( (res : any ) =>{
+    let test = this.lightService.getLightingSystemConfiguration('blejaService')
+    .subscribe( (res : any ) =>{
       console.log(res);
         this.lightPointList = res.lightPoints;
       });

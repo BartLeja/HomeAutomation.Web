@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 // import { HubConnection, HubConnectionBuilder, HubConnectionState} from '@aspnet/signalr';
 // import * as signalR from '@aspnet/signalr';
 import  { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel} from '@microsoft/signalr'
@@ -6,6 +6,8 @@ import { SignalRLightPoint } from '../models/signalR-light-point.model'
 import { Subject, Observable } from 'rxjs';
 import { Guid } from "guid-typescript";
 import { environment } from '../../../environments/environment'
+import { LightService } from './light-control.service';
+
 
 @Injectable({
     providedIn: 'root',
@@ -16,7 +18,9 @@ import { environment } from '../../../environments/environment'
     private hubConnection: HubConnection;
     private builder : HubConnectionBuilder;
     public isConnectedToSignRProperty = true;
-    constructor() {}
+    public newConnectionEvent = new EventEmitter();
+
+    constructor(private lightService: LightService) {}
 
     public sendMessage(message: SignalRLightPoint) {
         this.lightPointSubject.next(message);
@@ -75,7 +79,9 @@ import { environment } from '../../../environments/environment'
         this.hubConnection
         .start()
         .then(x=>{
-            this.isConnectedToSignRProperty = true;
+            //this.isConnectedToSignRProperty = true;
+            this.newConnectionEvent.emit('connectedToSignalR');
+            //this.lightService.getLightingSystemConfiguration('blejaService').subscribe();
         })
         .catch(err => {
             console.error(err.toString()); 
@@ -83,7 +89,7 @@ import { environment } from '../../../environments/environment'
     }
 
     public isConnectedToSignR(): boolean {
-        this.isConnectedToSignRProperty = this.hubConnection.state === HubConnectionState.Connected ? true : false;
-        return  this.isConnectedToSignRProperty;
+        //this.isConnectedToSignRProperty = this.hubConnection.state === HubConnectionState.Connected ? true : false;
+        return  this.hubConnection.state === HubConnectionState.Connected ? true : false;
     }
   }

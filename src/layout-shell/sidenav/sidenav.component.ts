@@ -12,7 +12,7 @@ import { SignalRLightControlClientService } from 'src/workspace/light-control/se
 export class SidenavComponent implements OnInit, OnDestroy{
 
   @ViewChild('snav') sidenav: MatSidenav;
-  public isConnectedToSignR = true;
+  public isConnectedToSignalR = true;
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
@@ -21,10 +21,13 @@ export class SidenavComponent implements OnInit, OnDestroy{
       private changeDetectorRef: ChangeDetectorRef, 
       private media: MediaMatcher, 
       private sidenavService: SidenavService,
-      public signalR : SignalRLightControlClientService) {
+      public signalRClient : SignalRLightControlClientService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.signalRClient.newConnectionEvent.subscribe(()=>{
+      this.isConnectedToSignalR = true;
+    });
     document.addEventListener(
       "visibilitychange"
       , () => { 
@@ -32,9 +35,10 @@ export class SidenavComponent implements OnInit, OnDestroy{
           console.log("document is hidden");
         }else{
           console.log("document is showing");
-          this.signalR.isConnectedToSignR();
-          if(!this.signalR.isConnectedToSignRProperty){
-            this.signalR.startHubCennection();
+          this.isConnectedToSignalR = this.signalRClient.isConnectedToSignR();
+          //this.isConnectedToSignR = this.signalRClient.isConnectedToSignRProperty;
+          if(!this.isConnectedToSignalR){
+            this.signalRClient.startHubCennection();
           }
         }
       }
