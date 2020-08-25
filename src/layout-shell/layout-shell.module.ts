@@ -34,6 +34,7 @@ import { CoreModule } from 'src/core/core.module';
     MatSlideToggleModule,
     MatTreeModule,
     LightControlModule,
+    CoreModule
   
   ]
 })

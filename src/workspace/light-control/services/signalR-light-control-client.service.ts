@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import { HubConnection, HubConnectionBuilder, HubConnectionState} from '@aspnet/signalr';
-import * as signalR from '@aspnet/signalr';
+// import { HubConnection, HubConnectionBuilder, HubConnectionState} from '@aspnet/signalr';
+// import * as signalR from '@aspnet/signalr';
+import  { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel} from '@microsoft/signalr'
 import { SignalRLightPoint } from '../models/signalR-light-point.model'
 import { Subject, Observable } from 'rxjs';
 import { Guid } from "guid-typescript";
@@ -14,9 +15,8 @@ import { environment } from '../../../environments/environment'
     private lightPointSubject = new Subject<SignalRLightPoint>();
     private hubConnection: HubConnection;
     private builder : HubConnectionBuilder;
+    public isConnectedToSignRProperty = true;
     constructor() {}
-
-    private testToken = localStorage.getItem('id_token');
 
     public sendMessage(message: SignalRLightPoint) {
         this.lightPointSubject.next(message);
@@ -32,7 +32,8 @@ import { environment } from '../../../environments/environment'
         .withUrl(environment.LightingSystemSignlRHubUrl, {
             accessTokenFactory: () =>  localStorage.getItem('id_token')
         })
-        .configureLogging(signalR.LogLevel.Information)
+        .withAutomaticReconnect()
+        .configureLogging(LogLevel.Information)
         .build();
        
         
@@ -50,11 +51,6 @@ import { environment } from '../../../environments/environment'
             this.startHubCennection();
         })
 
-       
-        // this.hubConnection
-        //     .start()
-        //     .catch(err => {
-        //         console.error(err.toString())} );
         this.startHubCennection();
     }
 
@@ -79,10 +75,15 @@ import { environment } from '../../../environments/environment'
         this.hubConnection
         .start()
         .then(x=>{
-
+            this.isConnectedToSignRProperty = true;
         })
         .catch(err => {
             console.error(err.toString()); 
             setTimeout(() => this.startHubCennection(), 5000)} );
+    }
+
+    public isConnectedToSignR(): boolean {
+        this.isConnectedToSignRProperty = this.hubConnection.state === HubConnectionState.Connected ? true : false;
+        return  this.isConnectedToSignRProperty;
     }
   }
