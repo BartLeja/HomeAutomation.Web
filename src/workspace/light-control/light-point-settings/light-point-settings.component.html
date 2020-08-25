@@ -3,12 +3,25 @@
     <button class="setting-button" 
         mat-raised-button 
         color="primary" 
+        (click) = "openDialog()">
+        Add to light group
+    </button>
+    <button class="setting-button" 
+      mat-raised-button 
+      color="primary" 
+      (click) = "openDialog()">
+      Remove from light group
+    </button>
+    <button class="setting-button" 
+        mat-raised-button 
+        color="warn" 
         (click) = "resetLightPoint()">
         Rest light point
     </button>
     <button 
     class="setting-button"  
-    mat-raised-button color="primary" 
+    mat-raised-button 
+    color="warn"
     (click) = "hardResetLightPoint()">
     Hard rest light point
   </button>

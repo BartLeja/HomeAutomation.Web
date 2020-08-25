@@ -25,18 +25,20 @@ export class SidenavComponent implements OnInit, OnDestroy{
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
     this.signalRClient.newConnectionEvent.subscribe(()=>{
       this.isConnectedToSignalR = true;
     });
+
     document.addEventListener(
       "visibilitychange"
       , () => { 
         if (document.hidden) { 
+          this.isConnectedToSignalR = false;
           console.log("document is hidden");
         }else{
           console.log("document is showing");
-          this.isConnectedToSignalR = this.signalRClient.isConnectedToSignR();
-          //this.isConnectedToSignR = this.signalRClient.isConnectedToSignRProperty;
+          this.isConnectedToSignalR = this.signalRClient.isConnected();
           if(!this.isConnectedToSignalR){
             this.signalRClient.startHubCennection();
           }
@@ -46,7 +48,6 @@ export class SidenavComponent implements OnInit, OnDestroy{
    }
 
  
-
   ngOnInit() {
     this.sidenavService.sidenavInit(this.sidenav);
   }

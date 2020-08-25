@@ -1,6 +1,10 @@
+<div class="center" *ngIf ="!isLoaded">
+  <app-spinner ></app-spinner>
+</div>
 <div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
        <div fxFlex *ngFor="let lightPoint of lightPointList" class="card-item">
 
-         <app-light-card *ngIf="lightPoint.isAvailable" [ngStyle]="{'width':'900' + 'px'}" [lightPoint]="lightPoint"></app-light-card>
+         <app-light-card *ngIf="lightPoint.isAvailable"  [lightPoint]="lightPoint"></app-light-card>
        </div>
-  </div> 
+      
+  </div>

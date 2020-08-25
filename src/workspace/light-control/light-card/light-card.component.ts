@@ -21,7 +21,7 @@ export class LightCardComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   public ngOnInit() {
-    console.log(this.lightPoint);
+    // console.log(this.lightPoint);
     this.subscription =
       this.signalRLightControlClientService.getMessage().subscribe(message => {
       if (message) {
@@ -32,7 +32,7 @@ export class LightCardComponent implements OnInit, OnDestroy {
           lb.status = message.lightPointStatus;
         } 
       });
-        console.log(message);
+        // console.log(message);
       } else {
         // clear messages when empty message received
         // this.messages = [];
@@ -40,15 +40,15 @@ export class LightCardComponent implements OnInit, OnDestroy {
     }); 
   }
   
-  public changeLightStatus(lightPointNumber: Guid, status: boolean,) {
+  public changeLightStatus(lightBulbNumber: Guid, status: boolean,) {
     if(!this.signalRLightControlClientService.isConnected){
       this.signalRLightControlClientService.startHubCennection();
     }
 
-    this.signalRLightControlClientService.sendLightPointStatus(lightPointNumber,status);
+    this.signalRLightControlClientService.sendLightPointStatus(lightBulbNumber,status);
     this.lightPoint.lightBulbs.map(lb => {
-      //TODO renema for bulb
-      if(lb.id === lightPointNumber){
+   
+      if(lb.id === lightBulbNumber){
         lb.status = status;
       } 
     });
@@ -57,6 +57,7 @@ export class LightCardComponent implements OnInit, OnDestroy {
   public routeToSettings(lightPointId:Guid){
     this.router.navigate(['/shell/LightPointSettings',lightPointId]);
   }
+
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks

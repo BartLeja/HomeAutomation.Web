@@ -76,20 +76,17 @@ import { LightService } from './light-control.service';
     }
 
     public startHubCennection() : void {
-        this.hubConnection
-        .start()
-        .then(x=>{
-            //this.isConnectedToSignRProperty = true;
+        if(this.hubConnection.state !== HubConnectionState.Connected){
+            this.hubConnection
+            .start()
+            .then(x=>{
+                this.newConnectionEvent.emit('connectedToSignalR');
+            })
+            .catch(err => {
+                console.error(err.toString()); 
+                setTimeout(() => this.startHubCennection(), 5000)} );
+        }else{
             this.newConnectionEvent.emit('connectedToSignalR');
-            //this.lightService.getLightingSystemConfiguration('blejaService').subscribe();
-        })
-        .catch(err => {
-            console.error(err.toString()); 
-            setTimeout(() => this.startHubCennection(), 5000)} );
-    }
-
-    public isConnectedToSignR(): boolean {
-        //this.isConnectedToSignRProperty = this.hubConnection.state === HubConnectionState.Connected ? true : false;
-        return  this.hubConnection.state === HubConnectionState.Connected ? true : false;
+        } 
     }
   }
