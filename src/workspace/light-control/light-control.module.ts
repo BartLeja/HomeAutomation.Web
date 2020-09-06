@@ -10,6 +10,7 @@ import { LightGroupDialogComponent } from './light-group-dialog/light-group-dial
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { CoreModule } from 'src/core/core.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LightSwitcherComponent, LightCardComponent, LightPointSettingsComponent, LightGroupDialogComponent],
@@ -22,7 +23,8 @@ import { CoreModule } from 'src/core/core.module';
     MatCheckboxModule,
     MatDialogModule,
     MatInputModule,
-    CoreModule
+    CoreModule,
+    FormsModule
   ],
   entryComponents: [LightGroupDialogComponent]
 })

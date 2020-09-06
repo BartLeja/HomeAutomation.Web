@@ -6,9 +6,9 @@ export const environment = {
   production: false,
   // LightingSystemSignlRHubUrl: 'https://localhost:5003/HomeLightSystemHub',
   // LightingSystemServiceUrl: 'https://localhost:5003/',
-  IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
   LightingSystemSignlRHubUrl: 'https://lightingsystemapi20200320102759.azurewebsites.net/HomeLightSystemHub',
-   LightingSystemServiceUrl: 'https://lightingsystemapi20200320102759.azurewebsites.net/'
+  LightingSystemServiceUrl: 'https://lightingsystemapi20200320102759.azurewebsites.net/',
+  IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
   // IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
  
 };

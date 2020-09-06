@@ -71,6 +71,10 @@ import { LightService } from './light-control.service';
         this.hubConnection.invoke('SendRestOfLightPointMessage',lightPointId);
     }
 
+    public sendLightPointsGroupStatus(lightPointsGroupId: Guid, status: boolean){
+        this.hubConnection.invoke('SendLightPointsGroupStatus',lightPointsGroupId,status );
+    }
+
     public isConnected() : boolean{
         return this.hubConnection.state === HubConnectionState.Connected ? true : false;
     }
@@ -84,7 +88,14 @@ import { LightService } from './light-control.service';
             })
             .catch(err => {
                 console.error(err.toString()); 
-                setTimeout(() => this.startHubCennection(), 5000)} );
+                if(this.hubConnection.state !== HubConnectionState.Connected){ 
+                    setTimeout(() => this.startHubCennection(), 5000)
+                }else{
+                    this.newConnectionEvent.emit('connectedToSignalR');
+                }
+               
+            } );
+
         }else{
             this.newConnectionEvent.emit('connectedToSignalR');
         } 

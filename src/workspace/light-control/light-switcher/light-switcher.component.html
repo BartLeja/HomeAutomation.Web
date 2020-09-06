@@ -1,10 +1,32 @@
 <div class="center" *ngIf ="!isLoaded">
   <app-spinner ></app-spinner>
 </div>
-<div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
+<!-- <div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
        <div fxFlex *ngFor="let lightPoint of lightPointList" class="card-item">
 
          <app-light-card *ngIf="lightPoint.isAvailable"  [lightPoint]="lightPoint"></app-light-card>
        </div>
       
-  </div>
+  </div> -->
+
+  <div fxLayout="row" fxFlex.md="70" *ngFor="let lightPoint of lightPointList" fxLayoutWrap class="card-deck-container mat-elevation-z4">
+   
+    <div class="card-item" *ngIf="lightPoint.groupName !=='not grouped'">
+      <p>Group name:</p>
+      <p>{{lightPoint.groupName}}</p>
+      <mat-icon class="icon" (click) = "changeStatusOfLightsPointGroup(lightPoint.groupId, true)">power</mat-icon>
+      <mat-icon class="icon" (click) = "changeStatusOfLightsPointGroup(lightPoint.groupId, false)">power_off</mat-icon>
+      <!-- <button class="setting-button" 
+          mat-raised-button 
+          color="primary" 
+          (click) = "changeStatusOfLightsPointGroup(lightPoint.groupId)">
+          On
+      </button> -->
+    </div>
+    
+    <div fxFlex *ngFor="let lp of lightPoint.lightPoint" class="card-item">
+
+      <app-light-card *ngIf="lp.isAvailable"  [lightPoint]="lp"></app-light-card>
+    </div>
+   
+</div>
