@@ -14,8 +14,8 @@ export class LightService {
     }
 
     public getLightingSystemConfiguration(): Observable<any> {
-        //TODO get GUID of homelightsystem
-         return this.http.get(`${environment.LightingSystemServiceUrl}api/HomeLightSystem/bdcd95ec-2dc6-4a7b-90ca-f132a7784b0f`);
+        const homeAutomationId = localStorage.getItem("home_automation_id")
+         return this.http.get(`${environment.LightingSystemServiceUrl}api/HomeLightSystem/${homeAutomationId}`);
     }
 
     public addLightToGroup(lightsGroupDto: LightGroupDto): Observable<any> {

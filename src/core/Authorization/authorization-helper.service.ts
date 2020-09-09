@@ -10,10 +10,10 @@ export class AuthorizationHelperService {
     public setSession(authResult) {
         const helper = new JwtHelperService();
         const expirationDate = helper.getTokenExpirationDate(authResult.token);
-       // const expiresAt = moment().add(expirationDate,'second');
-
+        const claims = helper.decodeToken(authResult.token);
         localStorage.setItem('id_token', authResult.token);
         localStorage.setItem("expires_at", JSON.stringify(expirationDate));
+        localStorage.setItem('home_automation_id', claims.homeAutomationId);
     } 
 
     public isLoggedIn() {
@@ -24,7 +24,6 @@ export class AuthorizationHelperService {
         const expiration = localStorage.getItem("expires_at");
         const expiresAt = JSON.parse(expiration);
         let t2 = moment(expiresAt);
-       // let t = moment(expiration);
-        return moment(t2 );
+        return moment(t2);
     }  
 }

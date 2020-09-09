@@ -26,6 +26,7 @@ export class AuthService {
     public logout() : void {
         localStorage.removeItem("id_token");
         localStorage.removeItem("expires_at");
+        localStorage.removeItem("home_automation_id");
     }
 
     public isLoggedIn() {
