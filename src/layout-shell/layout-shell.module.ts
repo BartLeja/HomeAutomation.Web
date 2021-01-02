@@ -18,6 +18,7 @@ import {
 import { LayoutShellRouting } from './layout-shell.routing';
 import { LightControlModule } from 'src/workspace/light-control/light-control.module';
 import { CoreModule } from 'src/core/core.module';
+import { SoundControlModule } from 'src/workspace/sound-control/sound-control.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CoreModule } from 'src/core/core.module';
     MatSlideToggleModule,
     MatTreeModule,
     LightControlModule,
+    SoundControlModule,
     CoreModule
   
   ]

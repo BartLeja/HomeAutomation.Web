@@ -40,7 +40,6 @@ import { LightService } from './light-control.service';
         .configureLogging(LogLevel.Information)
         .build();
        
-        
         this.hubConnection.on('ReceiveMessage', (user, message) => {
             console.log(`Message from ${user} recived. ${message}`);
           });
