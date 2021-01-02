@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { UserAccessRouting } from './user-access.routing';
-import { AngularFittextModule } from 'angular-fittext';
+
 
 import {
   MatToolbarModule,
@@ -36,7 +36,6 @@ import { LoginErrorsSnackComponent } from './login-errors-snack/login-errors-sna
     MatInputModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    AngularFittextModule,
   ],
   entryComponents: [LoginErrorsSnackComponent]
 })

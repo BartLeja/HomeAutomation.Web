@@ -11,7 +11,7 @@ import { SignalRLightControlClientService } from 'src/workspace/light-control/se
 })
 export class SidenavComponent implements OnInit, OnDestroy{
 
-  @ViewChild('snav') sidenav: MatSidenav;
+  @ViewChild('snav', { static: true }) sidenav: MatSidenav;
   public isConnectedToSignalR = true;
   mobileQuery: MediaQueryList;
 
@@ -46,7 +46,6 @@ export class SidenavComponent implements OnInit, OnDestroy{
       }
     );
    }
-
  
   ngOnInit() {
     this.sidenavService.sidenavInit(this.sidenav);
