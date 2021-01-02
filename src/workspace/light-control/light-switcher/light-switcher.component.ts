@@ -4,6 +4,7 @@ import { LocalLightingService } from '../models/local-lighting-service.model';
 import { SignalRLightControlClientService } from '../services/signalR-light-control-client.service';
 import * as _ from 'lodash';
 import { Guid } from 'guid-typescript';
+import { VoiceRecognitionService } from '../services/voice-recognition.service';
 
 @Component({
   selector: 'app-light-switcher',
@@ -16,7 +17,8 @@ export class LightSwitcherComponent implements OnInit {
   public isLoaded = false;
  
   constructor(private lightService: LightService,
-              private signalRLightControlClientService: SignalRLightControlClientService ) { 
+              private signalRLightControlClientService: SignalRLightControlClientService,
+              private voiceRecognitionService: VoiceRecognitionService ) { 
    }
 
   ngOnInit() {
@@ -71,11 +73,13 @@ export class LightSwitcherComponent implements OnInit {
         console.log(this.lightPointList);
       });
     
+      // this.voiceRecognitionService.init();
+      // this.voiceRecognitionService.start();
   }
 
   public changeStatusOfLightsPointGroup(lightspointGroupId: any,status: boolean){
     this.signalRLightControlClientService.sendLightPointsGroupStatus(lightspointGroupId,status);
-    let t=  this.lightPointList
+    let t = this.lightPointList
       .filter(lg=>lg.groupId===lightspointGroupId)
       .flatMap(lp=>lp.lightPoint.map(lp=>lp.lightBulbs.map(b=>b.status=status)));
 
@@ -84,6 +88,5 @@ export class LightSwitcherComponent implements OnInit {
       //   .map(lb=>lb.lightPointStatus = status));
     
         console.log(t);
-      
   }
 }

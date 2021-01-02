@@ -57,7 +57,7 @@ import { LightService } from './light-control.service';
         this.startHubCennection();
     }
 
-    public sendLightPointStatus(lightBulbId: Guid, status: boolean)
+    public sendLightPointStatus(lightBulbId: any, status: boolean)
     {
         this.hubConnection.invoke('SendLightPointStatus',lightBulbId,status);
     }
