@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { SignalRLightControlClientService } from '../services/signalR-light-control-client.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { LightGroupDialogComponent } from '../light-group-dialog/light-group-dialog.component';
 import { LightService } from '../services/light-control.service';
 

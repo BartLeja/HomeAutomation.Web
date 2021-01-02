@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { LightService } from '../services/light-control.service';
 import { LightGroupDto } from '../dtos/light-group.dto';
 import { Guid } from 'guid-typescript';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-light-group-dialog',

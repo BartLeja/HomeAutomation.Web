@@ -5,15 +5,13 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {
-  MatToolbarModule,
-  MatSidenavModule,
-  MatButtonModule,
-  MatIconModule,
-  MatListModule,
-  MatSlideToggleModule,
-  MatTreeModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { LayoutShellRouting } from './layout-shell.routing';
 import { LightControlModule } from 'src/workspace/light-control/light-control.module';

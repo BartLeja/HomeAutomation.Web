@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SidenavService } from '../services/sidenav.service';
 import { SignalRLightControlClientService } from 'src/workspace/light-control/services/signalR-light-control-client.service';

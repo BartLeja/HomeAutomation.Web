@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginErrorsSnackComponent } from '../login-errors-snack/login-errors-snack.component';
 
 @Component({
