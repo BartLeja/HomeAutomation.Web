@@ -28,6 +28,5 @@ import { FormsModule } from '@angular/forms';
     CoreModule,
     FormsModule
   ],
-  entryComponents: [LightGroupDialogComponent]
 })
 export class LightControlModule { }

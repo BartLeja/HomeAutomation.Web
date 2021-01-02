@@ -34,7 +34,6 @@ import { LoginErrorsSnackComponent } from './login-errors-snack/login-errors-sna
     MatInputModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-  ],
-  entryComponents: [LoginErrorsSnackComponent]
+  ]
 })
 export class UserAccessModule { }
