@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { SignalRLightControlClientService } from '../services/signalR-light-control-client.service';
+import { LightSignalRClient } from '../services/signalR.client';
 import { Subscription } from 'rxjs';
 import { SignalRLightPoint } from '../models/signalR-light-point.model';
 import { Guid } from 'guid-typescript';
 import { Router } from '@angular/router';
+import { SignalRClient } from '../../../core/Services/signalR.client';
 
 @Component({
   selector: 'app-light-card',
@@ -17,7 +18,8 @@ export class LightCardComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    public signalRLightControlClientService: SignalRLightControlClientService, 
+    public signalRLightControlClientService: LightSignalRClient, 
+    public signalRClient: SignalRClient,
     private router: Router) { }
 
   public ngOnInit() {
@@ -34,8 +36,8 @@ export class LightCardComponent implements OnInit, OnDestroy {
   }
   
   public changeLightStatus(lightPointId: string, status: boolean,lightNumber: number) {
-    if(!this.signalRLightControlClientService.isConnected){
-      this.signalRLightControlClientService.startHubCennection();
+    if(!this.signalRClient.isConnected){
+      this.signalRClient.startHubCennection();
     }
 
     this.signalRLightControlClientService.sendLightPointStatus(lightPointId,status,lightNumber);

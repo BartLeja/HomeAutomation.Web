@@ -11,9 +11,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LightGroupDialogComponent } from './light-group-dialog/light-group-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { CoreModule } from 'src/core/core.module';
 import { FormsModule } from '@angular/forms';
 import { RenameLightDialogComponent } from './rename-light-dialog/rename-light-dialog.component';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [LightSwitcherComponent, LightCardComponent, LightPointSettingsComponent, LightGroupDialogComponent, RenameLightDialogComponent],

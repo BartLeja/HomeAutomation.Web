@@ -14,10 +14,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 
 import { LayoutShellRouting } from './layout-shell.routing';
-import { LightControlModule } from 'src/workspace/light-control/light-control.module';
-import { CoreModule } from 'src/core/core.module';
-import { SoundControlModule } from 'src/workspace/sound-control/sound-control.module';
-
+import { CoreModule } from '../core/core.module'
+import { LightControlModule } from '../workspace/light-control/light-control.module'
+import { SoundControlModule } from '../workspace/sound-control/sound-control.module'
 
 @NgModule({
   declarations: [LayoutComponent, SidenavComponent, ToolbarComponent],
@@ -35,7 +34,6 @@ import { SoundControlModule } from 'src/workspace/sound-control/sound-control.mo
     LightControlModule,
     SoundControlModule,
     CoreModule
-  
   ]
 })
 export class LayoutShellModule { }

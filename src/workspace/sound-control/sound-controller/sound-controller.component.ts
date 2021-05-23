@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SignalRClient } from '../services/signalR.client';
+import { SoundSignalRClient } from '../services/signalR.client';
 
 @Component({
   selector: 'app-sound-controller',
@@ -8,10 +8,10 @@ import { SignalRClient } from '../services/signalR.client';
 })
 export class SoundControllerComponent implements OnInit {
 
-  constructor(private signalRClient: SignalRClient) { }
+  constructor(private signalRClient: SoundSignalRClient) { }
 
   ngOnInit() {
-    this.signalRClient.signalRClientInit();
+   // this.signalRClient.signalRClientInit();
   }
 
   public volumeUp(){

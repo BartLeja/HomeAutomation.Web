@@ -1,87 +1,46 @@
 
-import {Injectable, EventEmitter} from '@angular/core';
-import  { HubConnection, HubConnectionBuilder, HubConnectionState, LogLevel} from '@microsoft/signalr'
-import { environment } from '../../../environments/environment'
+import {Injectable} from '@angular/core';
+import { SignalRClient } from '../../../core/Services/signalR.client';
 
 @Injectable({
     providedIn: 'root',
   })
-  export class SignalRClient {
-    private hubConnection: HubConnection;
-    private builder : HubConnectionBuilder;
-    public newConnectionEvent = new EventEmitter();
+  export class SoundSignalRClient {
+   
+    constructor(private signalRClient: SignalRClient){};
 
     public signalRClientInit(){
-        this.builder = new HubConnectionBuilder();
-        this.hubConnection = this.builder
-        .withUrl(environment.SoundSystemSignlRHubUrl
-        //     , 
-        //     {
-        //     accessTokenFactory: () =>  localStorage.getItem('id_token')
-        // }
-        )
-        .withAutomaticReconnect()
-        .configureLogging(LogLevel.Information)
-        .build();
-
-        this.hubConnection.onclose(()=>{
-            this.startHubCennection();
-        })
-
-        this.hubConnection.on('ChangeVolume', (level) => {
+       
+        this.signalRClient.hubConnection.on('ChangeVolume', (level) => {
            
             console.log(level);
           });
 
-        this.hubConnection.on('PowerOff', () => {
+        this.signalRClient.hubConnection.on('PowerOff', () => {
            
             console.log('PowerOff');
         });
 
-        this.hubConnection.on('PowerOn', () => {
+        this.signalRClient.hubConnection.on('PowerOn', () => {
            
             console.log('PowerOn');
         });
 
-        this.startHubCennection();
-
-    }
-
-    public startHubCennection() : void {
-        if(this.hubConnection.state !== HubConnectionState.Connected){
-            this.hubConnection
-            .start()
-            .then(x=>{
-                this.newConnectionEvent.emit('connectedToSignalR');
-            })
-            .catch(err => {
-                console.error(err.toString()); 
-                if(this.hubConnection.state !== HubConnectionState.Connected){ 
-                    setTimeout(() => this.startHubCennection(), 5000)
-                }else{
-                    this.newConnectionEvent.emit('connectedToSignalR');
-                }
-               
-            } );
-
-        }else{
-            this.newConnectionEvent.emit('connectedToSignalR');
-        } 
     }
 
     public sendMasterVolumeDown(){
-        this.hubConnection.invoke('SendMasterVolumeDown');
+        this.signalRClient.hubConnection.invoke('SendMasterVolumeDown');
     }
 
     public sendMasterVolumeUp(){
-        this.hubConnection.invoke('SendMasterVolumeUp'); 
+        this.signalRClient.hubConnection.invoke('SendMasterVolumeUp'); 
     }
 
     public sendPowerOff(){
-        this.hubConnection.invoke('SendPowerOff');
+        this.signalRClient.hubConnection.invoke('SendPowerOff');
     }
 
     public sendPowerOn(){
-        this.hubConnection.invoke('SendPowerOn'); 
+        this.signalRClient.hubConnection.invoke('SendPowerOn'); 
     }
   }

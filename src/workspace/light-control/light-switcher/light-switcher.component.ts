@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LightService } from '../services/light-control.service';
-import { LocalLightingService } from '../models/local-lighting-service.model';
-import { SignalRLightControlClientService } from '../services/signalR-light-control-client.service';
+import { LightSignalRClient } from '../services/signalR.client';
 import * as _ from 'lodash';
 import { Guid } from 'guid-typescript';
 import { OnDestroy } from '@angular/core';
@@ -19,7 +18,7 @@ export class LightSwitcherComponent implements OnInit, OnDestroy {
  
   //Za każdym razem jak zmniejszymy tworzy sie instancja serwisu trzeba cos z tym zrobic
   constructor(private lightService: LightService,
-              private signalRLightControlClientService: SignalRLightControlClientService ) { 
+              private lightSignalRClient: LightSignalRClient ) { 
    }
 
   ngOnDestroy(): void {
@@ -29,7 +28,7 @@ export class LightSwitcherComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getLights();
     // this.signalRLightControlClientService.signalRClientInit();
-    this.signalRLightControlClientService.newConnectionEvent.subscribe((s)=>{
+    this.lightSignalRClient.newConnectionEvent.subscribe((s)=>{
       console.log('Test');
       this.getLights();
     });
@@ -56,7 +55,7 @@ export class LightSwitcherComponent implements OnInit, OnDestroy {
   }
 
   public changeStatusOfLightsPointGroup(lightspointGroupId: any,status: boolean){
-    this.signalRLightControlClientService.sendLightPointsGroupStatus(lightspointGroupId,status);
+    this.lightSignalRClient.sendLightPointsGroupStatus(lightspointGroupId,status);
     let t=  this.lightPointList
       .filter(lg=>lg.groupId===lightspointGroupId)
       .flatMap(lp=>lp.lightPoint.map(lp=>lp.lightBulbs.map(b=>b.status=status)));

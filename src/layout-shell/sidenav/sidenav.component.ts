@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@ang
 import { MatSidenav } from '@angular/material/sidenav';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SidenavService } from '../services/sidenav.service';
-import { SignalRLightControlClientService } from 'src/workspace/light-control/services/signalR-light-control-client.service';
+import { SignalRClient } from '../../core/Services/signalR.client';
+import { LightSignalRClient } from '../../workspace/light-control/services/signalR.client';
+import { SoundSignalRClient } from '../../workspace/sound-control/services/signalR.client';
 
 @Component({
   selector: 'app-sidenav',
@@ -21,12 +23,16 @@ export class SidenavComponent implements OnInit, OnDestroy{
       private changeDetectorRef: ChangeDetectorRef, 
       private media: MediaMatcher, 
       private sidenavService: SidenavService,
-      public signalRClient : SignalRLightControlClientService) {
+      public signalRClient : SignalRClient,
+      public lightSignalRClient : LightSignalRClient,
+      public soundSignalRClient: SoundSignalRClient) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     
     this.signalRClient.signalRClientInit();
+    this.lightSignalRClient.signalRClientInit();
+    this.soundSignalRClient.signalRClientInit();
 
     this.signalRClient.newConnectionEvent.subscribe(()=>{
       this.isConnectedToSignalR = true;

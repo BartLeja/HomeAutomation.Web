@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-//  LightingSystemSignlRHubUrl: 'https://localhost:5003/HomeLightSystemHub',
-LightingSystemSignlRHubUrl: 'https://homeautomationsignalr20210407210041.azurewebsites.net/HomeLightSystemHub',
+//  HomeSystemSignlRHubUrl: 'https://localhost:5003/HomeSystemHub',
+  HomeSystemSignlRHubUrl: 'https://homeautomationsignalr20210407210041.azurewebsites.net/HomeSystemHub',
  //LightingSystemServiceUrl: 'https://localhost:5001/',
   LightingSystemServiceUrl: 'https://homeautomationlightingsystemapi20210403203211.azurewebsites.net/',
   // LightingSystemSignlRHubUrl: 'https://lightingsystemapi20200320102759.azurewebsites.net/HomeLightSystemHub',
@@ -10,6 +10,4 @@ LightingSystemSignlRHubUrl: 'https://homeautomationsignalr20210407210041.azurewe
   // LightingSystemServiceUrl: 'https://homeautomationlightapi.azurewebsites.net/',
   IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
   // IdentityServerbaseUrl: 'https://homeautomationidentityservice20190519114609.azurewebsites.net/',
-  //SoundSystemSignlRHubUrl: 'https://localhost:5003/HomeSoundSystemHub',
-  SoundSystemSignlRHubUrl: 'https://homeautomationsignalr20210407210041.azurewebsites.net/HomeSoundSystemHub',
 };
