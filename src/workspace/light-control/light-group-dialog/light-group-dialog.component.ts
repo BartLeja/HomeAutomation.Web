@@ -20,9 +20,8 @@ export class LightGroupDialogComponent implements OnInit {
 
   public addLightPointToGroup(){
     this.lightService.addLightToGroup({
-      id: Guid.create().toString(),
       lightGroupName: this.groupName,
-      lightPointId: this.data.lightPointId
+      deviceId: this.data.lightPointId
     }).subscribe();
   }
 }

@@ -1,23 +1,24 @@
 <mat-card class="example-card">
   
-      <div class ="bulb" *ngFor="let lightBulbs of lightPoint.lightBulbs">
+      <!-- <div class ="bulb" *ngFor="let lightBulbs of lightPoint.lightBulbs"> -->
+      <div class ="bulb" >
           <mat-card-header>
-            <mat-card-title>{{lightPoint.customName}}</mat-card-title>
+            <mat-card-title>{{lightPoint.name}}</mat-card-title>
             <!-- <mat-card-subtitle>Bulb first</mat-card-subtitle> -->
             <!-- <mat-icon class= "settings" (click) = "routeToSettings(lightPoint.id)" >settings</mat-icon> -->
           </mat-card-header>
         
           <div class="img-container">
-              <img (click) ="changeLightStatus(lightBulbs.id,true)"
+              <img (click) ="changeLightStatus(lightPoint.name,true, lightPoint.bulbNumber)"
                 class= "bulb-image"
-                *ngIf="!lightBulbs.status; else lightBulbOn" 
+                *ngIf="!lightPoint.status; else lightPointOn" 
                 mat-card-image src="/assets/light-bulb-off.webp" 
                 alt="Photo of a light off bulb"
               >
           
-            <ng-template #lightBulbOn>
+            <ng-template #lightPointOn>
                 <img  
-                  (click) = "changeLightStatus(lightBulbs.id,false)"
+                  (click) = "changeLightStatus(lightPoint.name,false,lightPoint.bulbNumber)"
                   class= "bulb-image"
                   mat-card-image src="/assets/light-bulb-on.webp" 
                   alt="Photo of a light on bulb"
@@ -34,7 +35,7 @@
             <button mat-button (click) = "changeLightStatus(lightBulbs.id,false)" >Off</button>
           </mat-card-actions> -->
           <div>
-            <div class="settings" (click) = "routeToSettings(lightPoint.id)">
+            <div class="settings" (click) = "routeToSettings(lightPoint.name)">
               <div class="icon">
                 <mat-icon [inline]="true"  >settings</mat-icon>
               </div>

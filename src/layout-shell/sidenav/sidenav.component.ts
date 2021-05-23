@@ -25,6 +25,8 @@ export class SidenavComponent implements OnInit, OnDestroy{
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    
+    this.signalRClient.signalRClientInit();
 
     this.signalRClient.newConnectionEvent.subscribe(()=>{
       this.isConnectedToSignalR = true;

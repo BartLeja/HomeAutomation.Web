@@ -37,15 +37,15 @@ import { LightService } from './light-control.service';
             accessTokenFactory: () =>  localStorage.getItem('id_token')
         })
         .withAutomaticReconnect()
-        .configureLogging(LogLevel.Information)
+        .configureLogging(LogLevel.Debug)
         .build();
        
         this.hubConnection.on('ReceiveMessage', (user, message) => {
             console.log(`Message from ${user} recived. ${message}`);
           });
 
-        this.hubConnection.on('ReceiveLightPointStatus', (lightBulbId, status) => {
-            this.lightPoint = new SignalRLightPoint(lightBulbId, status);
+        this.hubConnection.on('ReceiveLightPointStatus', (lightBulbId, status, lightNumber) => {
+            this.lightPoint = new SignalRLightPoint(lightNumber,  status, lightBulbId,);
             this.sendMessage(this.lightPoint);
             console.log( lightBulbId, status);
           });
@@ -54,32 +54,33 @@ import { LightService } from './light-control.service';
             this.startHubCennection();
         })
 
+
         this.startHubCennection();
     }
 
-    public sendLightPointStatus(lightBulbId: Guid, status: boolean)
+    public sendLightPointStatus(lightPointId: string, status: boolean,lightNumber : number)
     {
-        this.hubConnection.invoke('SendLightPointStatus',lightBulbId,status);
+        this.hubConnection.invoke('SendLightPointStatus',lightPointId,status, lightNumber);
     }
 
-    public sendHardRestOfLightPointMessage(lightPointId: Guid){
+    public sendHardRestOfLightPointMessage(lightPointId: any){
         this.hubConnection.invoke('SendHardRestOfLightPointMessage',lightPointId);
     }
 
-    public senddRestOfLightPointMessage(lightPointId: Guid){
+    public senddRestOfLightPointMessage(lightPointId: any){
         this.hubConnection.invoke('SendRestOfLightPointMessage',lightPointId);
     }
 
-    public sendLightPointsGroupStatus(lightPointsGroupId: Guid, status: boolean){
+    public sendLightPointsGroupStatus(lightPointsGroupId: any, status: boolean){
         this.hubConnection.invoke('SendLightPointsGroupStatus',lightPointsGroupId,status );
     }
 
     public isConnected() : boolean{
-        return this.hubConnection.state === HubConnectionState.Connected ? true : false;
+        return this.hubConnection?.state === HubConnectionState.Connected ? true : false;
     }
 
     public startHubCennection() : void {
-        if(this.hubConnection.state !== HubConnectionState.Connected){
+        if(this.hubConnection && this.hubConnection?.state && this.hubConnection?.state !== HubConnectionState.Connected){
             this.hubConnection
             .start()
             .then(x=>{
@@ -87,10 +88,10 @@ import { LightService } from './light-control.service';
             })
             .catch(err => {
                 console.error(err.toString()); 
-                if(this.hubConnection.state !== HubConnectionState.Connected){ 
+                if(this.hubConnection && this.hubConnection?.state && this.hubConnection.state !== HubConnectionState.Connected){ 
                     setTimeout(() => this.startHubCennection(), 5000)
                 }else{
-                    this.newConnectionEvent.emit('connectedToSignalR');
+                   // this.newConnectionEvent.emit('connectedToSignalR');
                 }
                
             } );

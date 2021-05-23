@@ -21,43 +21,30 @@ export class LightCardComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   public ngOnInit() {
-    // console.log(this.lightPoint);
+    
     this.subscription =
       this.signalRLightControlClientService.getMessage().subscribe(message => {
-      if (message) {
-
-      this.lightPoint.lightBulbs.map(lb => {
-        //TODO renema for bulb
-        if(lb.id === message.lightPointNumber){
-          lb.status = message.lightPointStatus;
-        } 
-      });
-        // console.log(message);
-      } else {
-        // clear messages when empty message received
-        // this.messages = [];
-      }
+      if (message && 
+        message.lightPointCustomName === this.lightPoint.name &&
+        message.lightPointNumber === this.lightPoint.bulbNumber
+        ) {
+        this.lightPoint.status = message.lightPointStatus;
+      } 
     }); 
   }
   
-  public changeLightStatus(lightBulbNumber: Guid, status: boolean,) {
+  public changeLightStatus(lightPointId: string, status: boolean,lightNumber: number) {
     if(!this.signalRLightControlClientService.isConnected){
       this.signalRLightControlClientService.startHubCennection();
     }
 
-    this.signalRLightControlClientService.sendLightPointStatus(lightBulbNumber,status);
-    this.lightPoint.lightBulbs.map(lb => {
-   
-      if(lb.id === lightBulbNumber){
-        lb.status = status;
-      } 
-    });
+    this.signalRLightControlClientService.sendLightPointStatus(lightPointId,status,lightNumber);
+    this.lightPoint.status = status;
   }
 
-  public routeToSettings(lightPointId:Guid){
+  public routeToSettings(lightPointId:any){
     this.router.navigate(['/shell/LightPointSettings',lightPointId]);
   }
-
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks

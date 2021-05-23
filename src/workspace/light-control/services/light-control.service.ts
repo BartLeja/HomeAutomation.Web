@@ -15,14 +15,22 @@ export class LightService {
 
     public getLightingSystemConfiguration(): Observable<any> {
         const homeAutomationId = localStorage.getItem("home_automation_id")
-         return this.http.get(`${environment.LightingSystemServiceUrl}api/HomeLightSystem/${homeAutomationId}`);
+        return this.http.get(`${environment.LightingSystemServiceUrl}api/HomeLightSystem/${homeAutomationId}`);
     }
 
     public addLightToGroup(lightsGroupDto: LightGroupDto): Observable<any> {
-        return this.http.post(`${environment.LightingSystemServiceUrl}api/LightPoint/addlightsgrouptolightpoint`,lightsGroupDto)
+        return this.http.post(`${environment.LightingSystemServiceUrl}api/HomeLightSystem/`,lightsGroupDto)
     }
 
-    public removeLightFromGroup(lightPointGuid: Guid ) : Observable<any> {
+    public removeLightFromGroup(lightPointGuid: any ) : Observable<any> {
         return this.http.delete(`${environment.LightingSystemServiceUrl}api/LightPoint/removelightsgroupfromlightpoint/${lightPointGuid.toString()}`)
+    }
+
+    public renameLightPoint(lightPointGuid: Guid, name: any):  Observable<any> {
+        // let headers = new Headers();
+        // headers.append('Content-Type', 'application/json');
+        const headers = {'Content-Type': 'application/json'}
+        
+        return this.http.post(`${environment.LightingSystemServiceUrl}api/LightPoint/renameLightPoint/${lightPointGuid.toString()}`,name);
     }
 }

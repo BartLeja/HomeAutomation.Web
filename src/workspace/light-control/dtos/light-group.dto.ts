@@ -1,7 +1,7 @@
 import { Guid } from 'guid-typescript';
 
 export class LightGroupDto {
-    public id : string;
+    public deviceId : string;
     public lightGroupName: string;
-    public lightPointId: string;
+   // public lightPointId: string;
  }

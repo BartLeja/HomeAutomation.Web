@@ -1,6 +1,13 @@
 <div class ="light-point-settings-container">
     <h3>Settings of light point {{lightPointId}}</h3>
     <button class="setting-button" 
+      mat-raised-button 
+      color="primary" 
+      (click) = "openRenameDialog()">
+      Rename light group
+    </button>
+    
+    <button class="setting-button" 
         mat-raised-button 
         color="primary" 
         (click) = "openDialog()">
@@ -19,10 +26,10 @@
         Rest light point
     </button>
     <button 
-    class="setting-button"  
-    mat-raised-button 
-    color="warn"
-    (click) = "hardResetLightPoint()">
-    Hard rest light point
-  </button>
+      class="setting-button"  
+      mat-raised-button 
+      color="warn"
+      (click) = "hardResetLightPoint()">
+      Hard rest light point
+    </button>
 </div>

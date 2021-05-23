@@ -5,6 +5,7 @@ import { SignalRLightControlClientService } from '../services/signalR-light-cont
 import { MatDialog } from '@angular/material/dialog';
 import { LightGroupDialogComponent } from '../light-group-dialog/light-group-dialog.component';
 import { LightService } from '../services/light-control.service';
+import { RenameLightDialogComponent } from '../rename-light-dialog/rename-light-dialog.component';
 
 @Component({
   selector: 'app-light-point-settings',
@@ -13,7 +14,7 @@ import { LightService } from '../services/light-control.service';
 })
 export class LightPointSettingsComponent implements OnInit {
 
-  public lightPointId: Guid;
+  public lightPointId: String;
   constructor(private activatedRoute: ActivatedRoute,
     private signalRLightControlClientService: SignalRLightControlClientService,
     public dialog: MatDialog, private lightService: LightService ) { }
@@ -52,4 +53,15 @@ export class LightPointSettingsComponent implements OnInit {
     });
   }
 
+  public openRenameDialog(){
+    const dialogRef = this.dialog.open(
+      RenameLightDialogComponent,{
+        data: { lightPointId: this.lightPointId }
+      }
+     );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
